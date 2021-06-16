@@ -1,0 +1,61 @@
+Name:                   stable-kube-prometheus-sta-operator
+Namespace:              default
+CreationTimestamp:      Thu, 10 Jun 2021 17:00:16 -0600
+Labels:                 app=kube-prometheus-stack-operator
+                        app.kubernetes.io/instance=stable
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/part-of=kube-prometheus-stack
+                        app.kubernetes.io/version=16.6.1
+                        chart=kube-prometheus-stack-16.6.1
+                        heritage=Helm
+                        release=stable
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: stable
+                        meta.helm.sh/release-namespace: default
+Selector:               app=kube-prometheus-stack-operator,release=stable
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app=kube-prometheus-stack-operator
+                    app.kubernetes.io/instance=stable
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/part-of=kube-prometheus-stack
+                    app.kubernetes.io/version=16.6.1
+                    chart=kube-prometheus-stack-16.6.1
+                    heritage=Helm
+                    release=stable
+  Service Account:  stable-kube-prometheus-sta-operator
+  Containers:
+   kube-prometheus-stack:
+    Image:      quay.io/prometheus-operator/prometheus-operator:v0.48.1
+    Port:       10250/TCP
+    Host Port:  0/TCP
+    Args:
+      --kubelet-service=kube-system/stable-kube-prometheus-sta-kubelet
+      --localhost=127.0.0.1
+      --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.48.1
+      --config-reloader-cpu=100m
+      --config-reloader-memory=50Mi
+      --web.enable-tls=true
+      --web.cert-file=/cert/cert
+      --web.key-file=/cert/key
+      --web.listen-address=:10250
+      --web.tls-min-version=VersionTLS13
+    Environment:  <none>
+    Mounts:
+      /cert from tls-secret (ro)
+  Volumes:
+   tls-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  stable-kube-prometheus-sta-admission
+    Optional:    false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   stable-kube-prometheus-sta-operator-7d5dc5b789 (1/1 replicas created)
+Events:          <none>

@@ -1,0 +1,67 @@
+Name:                   stable-kube-state-metrics
+Namespace:              default
+CreationTimestamp:      Thu, 10 Jun 2021 17:00:16 -0600
+Labels:                 app.kubernetes.io/instance=stable
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=kube-state-metrics
+                        app.kubernetes.io/version=2.0.0
+                        helm.sh/chart=kube-state-metrics-3.1.1
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: stable
+                        meta.helm.sh/release-namespace: default
+Selector:               app.kubernetes.io/name=kube-state-metrics
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/instance=stable
+                    app.kubernetes.io/name=kube-state-metrics
+  Service Account:  stable-kube-state-metrics
+  Containers:
+   kube-state-metrics:
+    Image:      k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.0.0
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Args:
+      --resources=certificatesigningrequests
+      --resources=configmaps
+      --resources=cronjobs
+      --resources=daemonsets
+      --resources=deployments
+      --resources=endpoints
+      --resources=horizontalpodautoscalers
+      --resources=ingresses
+      --resources=jobs
+      --resources=limitranges
+      --resources=mutatingwebhookconfigurations
+      --resources=namespaces
+      --resources=networkpolicies
+      --resources=nodes
+      --resources=persistentvolumeclaims
+      --resources=persistentvolumes
+      --resources=poddisruptionbudgets
+      --resources=pods
+      --resources=replicasets
+      --resources=replicationcontrollers
+      --resources=resourcequotas
+      --resources=secrets
+      --resources=services
+      --resources=statefulsets
+      --resources=storageclasses
+      --resources=validatingwebhookconfigurations
+      --resources=volumeattachments
+      --telemetry-port=8081
+    Liveness:     http-get http://:8080/healthz delay=5s timeout=5s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:8080/ delay=5s timeout=5s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   stable-kube-state-metrics-5bbf888768 (1/1 replicas created)
+Events:          <none>
