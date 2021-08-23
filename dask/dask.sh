@@ -2,7 +2,7 @@
 
 if [[ $1 == "install" ]]
 then
-  helm install dask-k8s dask/dask
+  helm install dask-k8s dask/dask -f config.yaml
 elif [[ $1 == "uninstall" ]]
 then
   helm uninstall dask-k8s
