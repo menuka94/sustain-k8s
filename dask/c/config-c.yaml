@@ -1,0 +1,26 @@
+# config.yaml
+
+worker:
+  replicas: 25
+  resources:
+    limits:
+      cpu: 1
+      memory: 8G
+    requests: 
+      cpu: 1
+      memory: 8G
+  env:
+    - name: EXTRA_CONDA_PACKAGES
+      value: -c conda-forge prophet 
+    - name: EXTRA_PIP_PACKAGES
+      value: pandas==1.2.5 pymongo sklearn blosc lz4    
+
+
+# We want to keep the same packages on the worker and jupyter environments
+jupyter:
+  enabled: false
+  env:
+    - name: EXTRA_PIP_PACKAGES
+      value: pandas==1.2.5      
+    - name: EXTRA_CONDA_PACKAGES
+      value: -c conda-forge prophet
