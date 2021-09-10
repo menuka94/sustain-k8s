@@ -5,10 +5,10 @@ worker:
   resources:
     limits:
       cpu: 1
-      memory: 2G
+      memory: 4
     requests: 
       cpu: 1
-      memory: 2G
+      memory: 4
   env:
     - name: EXTRA_CONDA_PACKAGES
       value: -c conda-forge prophet 
