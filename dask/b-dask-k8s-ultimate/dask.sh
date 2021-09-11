@@ -36,7 +36,8 @@ function uninstall {
 }
 
 function print_help {
-  echo "Help message"
+  echo "--start    : Start Cluster"
+  echo "--stop     : Stop Cluster"
 }
 
 #if [[ $1 == "install" || $1 == "i" ]]
@@ -60,18 +61,18 @@ for var in "$@"; do
   case "$var" in
     "--install" | "-i")
       install
-      exit 0
-      ;;
-    "--uninstall" | "-u")
-      uninstall
-      exit 0
-      ;;
-    "--start-dashboard" | "-start-d")
+      sleep 20
       start_dashboard
       exit 0
       ;;
-    "--stop-dashboard" | "-stop-d")
+    "--uninstall" | "-u")
       stop_dashboard
+      sleep 5
+      uninstall
+      exit 0
+      ;;
+    "--help" | "-h")
+      print_help
       exit 0
       ;;
     *)
