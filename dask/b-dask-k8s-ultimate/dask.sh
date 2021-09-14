@@ -32,7 +32,7 @@ function install {
 
 function uninstall {
   echo -e "Stopping ${CLUSTER_NAME}"
-  helm uninstall dask-k8s-b1
+  helm uninstall dask-k8s-${CLUSTER_NAME}
 }
 
 function print_help {

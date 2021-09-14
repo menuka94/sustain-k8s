@@ -1,7 +1,7 @@
 # config.yaml
 
 worker:
-  replicas: 25
+  replicas: 1
   resources:
     limits:
       cpu: 8
